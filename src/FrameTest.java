@@ -11,12 +11,14 @@ class FrameTest extends JFrame
     FrameInterfaceEmailPass frameInterfaceEmailPass;
     FrameTextArea frameTextArea;
     FrameCheckBoxRadioButton frameCheckBoxRadioButton;
+    FrameComboBoxSlider frameComboBoxSlider;
 
     static Boolean ventanaCalculadoraAbierta = false,
             ventanaFrameBorderLayout = false,
             ventanaEmailPass = false,
             ventanaTextAreaAbierta = false,
-            ventanaCheckBoxRadioBAbierta = false;
+            ventanaCheckBoxRadioBAbierta = false,
+            ventanaComboBoxSlider = false;
 
     FrameTest(){
         start();
@@ -49,6 +51,7 @@ class FrameTest extends JFrame
         JButton buttonAmarillo = new JButton("Amarillo");
         JButton buttonRojo = new JButton("Rojo");
         JButton buttonAzul = new JButton("Azul");
+        JButton buttonGoComboBoxSlider = new JButton("Abrir ComboBox JSlider");
 
         public PanelButton(){
 
@@ -69,6 +72,7 @@ class FrameTest extends JFrame
             buttonGoInterfaceEmailPass.addActionListener(new EventoAbrirPanel());
             buttonGoTextAreaTest.addActionListener(new EventoAbrirPanel());
             buttonGoCheckBoxRadioB.addActionListener(new EventoAbrirPanel());
+            buttonGoComboBoxSlider.addActionListener(new EventoAbrirPanel());
 
             buttonAmarillo.setBackground(Color.yellow);
             add(buttonAmarillo);
@@ -94,6 +98,10 @@ class FrameTest extends JFrame
             buttonGoCheckBoxRadioB.setForeground(Color.MAGENTA.brighter());
             buttonGoCheckBoxRadioB.setBackground(Color.BLACK);
             add(buttonGoCheckBoxRadioB);
+
+            buttonGoComboBoxSlider.setForeground(Color.blue);
+            buttonGoComboBoxSlider.setBackground(Color.WHITE);
+            add(buttonGoComboBoxSlider);
         }
 
         private class EventoAbrirPanel implements ActionListener{
@@ -132,6 +140,20 @@ class FrameTest extends JFrame
                             frameBorderLayout.setState(JFrame.NORMAL);
 
                         frameBorderLayout.toFront();
+                    }
+
+                }else if(evento == buttonGoComboBoxSlider){
+
+                    if(!ventanaComboBoxSlider){
+                        frameComboBoxSlider = new FrameComboBoxSlider();
+                        frameComboBoxSlider.setVisible(true);
+                        ventanaComboBoxSlider = true;
+                    }else{
+
+                        if (frameComboBoxSlider.getState() == JFrame.ICONIFIED)
+                            frameComboBoxSlider.setState(JFrame.NORMAL);
+
+                        frameComboBoxSlider.toFront();
                     }
 
                 }else if(evento == buttonGoCheckBoxRadioB){
