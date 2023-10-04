@@ -4,15 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Objects;
 
 class FrameCalculadoraGridLayoutTest extends JFrame
 {
     FrameCalculadoraGridLayoutTest frameCalculadoraGridLayoutTest;
     private JButton botonPantalla;
     private Boolean principio = true;
-    private double acumuladoGuardado1 = 0;
-    private double acumuladorSuma = 0;
+
     private double acumuladorNumerosClaculadora = 0;
 
 

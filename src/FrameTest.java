@@ -10,11 +10,13 @@ class FrameTest extends JFrame
     FrameCalculadoraGridLayoutTest frameCalculadoraGridLayoutTest;
     FrameInterfaceEmailPass frameInterfaceEmailPass;
     FrameTextArea frameTextArea;
+    FrameCheckBoxRadioButton frameCheckBoxRadioButton;
 
     static Boolean ventanaCalculadoraAbierta = false,
             ventanaFrameBorderLayout = false,
             ventanaEmailPass = false,
-            ventanaTextAreaAbierta = false;
+            ventanaTextAreaAbierta = false,
+            ventanaCheckBoxRadioBAbierta = false;
 
     FrameTest(){
         start();
@@ -43,6 +45,7 @@ class FrameTest extends JFrame
         JButton buttonGoBorderPanel = new JButton("Abrir panel Border");
         JButton buttonGoCalculadoraGridLayoutPanel = new JButton("Abrir Calculadora");
         JButton buttonGoInterfaceEmailPass = new JButton("Abrir Interface Usuario y Contraseña");
+        JButton buttonGoCheckBoxRadioB = new JButton("Abrir CheckBox RadioButton");
         JButton buttonAmarillo = new JButton("Amarillo");
         JButton buttonRojo = new JButton("Rojo");
         JButton buttonAzul = new JButton("Azul");
@@ -51,6 +54,13 @@ class FrameTest extends JFrame
 
             setLayout(new FlowLayout(FlowLayout.LEFT,20,50)); //cambia la ubicacion del FlowLayout a la izquierda y la separacion en pixeles entre ejes X e Y
 
+            iniciarBotones();
+
+        }
+
+
+        private void iniciarBotones(){
+
             buttonGoBorderPanel.addActionListener(new EventoAbrirPanel());
             buttonGoCalculadoraGridLayoutPanel.addActionListener(new EventoAbrirPanel());
             buttonAmarillo.addActionListener(new EventoAbrirPanel());
@@ -58,6 +68,7 @@ class FrameTest extends JFrame
             buttonRojo.addActionListener(new EventoAbrirPanel());
             buttonGoInterfaceEmailPass.addActionListener(new EventoAbrirPanel());
             buttonGoTextAreaTest.addActionListener(new EventoAbrirPanel());
+            buttonGoCheckBoxRadioB.addActionListener(new EventoAbrirPanel());
 
             buttonAmarillo.setBackground(Color.yellow);
             add(buttonAmarillo);
@@ -74,13 +85,15 @@ class FrameTest extends JFrame
             add(buttonGoCalculadoraGridLayoutPanel);
 
             buttonGoInterfaceEmailPass.setBackground(Color.green);
-           add(buttonGoInterfaceEmailPass);
+            add(buttonGoInterfaceEmailPass);
 
-           buttonGoTextAreaTest.setForeground(Color.green);
-           buttonGoTextAreaTest.setBackground(Color.BLACK);
-           add(buttonGoTextAreaTest);
+            buttonGoTextAreaTest.setForeground(Color.green);
+            buttonGoTextAreaTest.setBackground(Color.BLACK);
+            add(buttonGoTextAreaTest);
 
-
+            buttonGoCheckBoxRadioB.setForeground(Color.MAGENTA.brighter());
+            buttonGoCheckBoxRadioB.setBackground(Color.BLACK);
+            add(buttonGoCheckBoxRadioB);
         }
 
         private class EventoAbrirPanel implements ActionListener{
@@ -119,6 +132,20 @@ class FrameTest extends JFrame
                             frameBorderLayout.setState(JFrame.NORMAL);
 
                         frameBorderLayout.toFront();
+                    }
+
+                }else if(evento == buttonGoCheckBoxRadioB){
+
+                    if(!ventanaCheckBoxRadioBAbierta){
+                        frameCheckBoxRadioButton = new FrameCheckBoxRadioButton();
+                        frameCheckBoxRadioButton.setVisible(true);
+                        ventanaCheckBoxRadioBAbierta = true;
+                    }else{
+
+                        if (frameCheckBoxRadioButton.getState() == JFrame.ICONIFIED)
+                            frameCheckBoxRadioButton.setState(JFrame.NORMAL);
+
+                        frameCheckBoxRadioButton.toFront();
                     }
 
                 }else if(evento == buttonGoInterfaceEmailPass){
