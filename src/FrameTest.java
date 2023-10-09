@@ -12,13 +12,16 @@ class FrameTest extends JFrame
     FrameTextArea frameTextArea;
     FrameCheckBoxRadioButton frameCheckBoxRadioButton;
     FrameComboBoxSlider frameComboBoxSlider;
+    FrameSpinner frameSpinner;
+
 
     static Boolean ventanaCalculadoraAbierta = false,
             ventanaFrameBorderLayout = false,
             ventanaEmailPass = false,
             ventanaTextAreaAbierta = false,
             ventanaCheckBoxRadioBAbierta = false,
-            ventanaComboBoxSlider = false;
+            ventanaComboBoxSlider = false,
+    ventanaSpinner = false;
 
     FrameTest(){
         start();
@@ -30,16 +33,17 @@ class FrameTest extends JFrame
 
         setTitle("Test Layout");
 
+        ImageIcon imageIcon = new ImageIcon("imagenes/puerta.png"); //carga imagen desde la carpeta
+
+        setIconImage(imageIcon.getImage()); //establece como imagen icono de este frame
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         PanelButton panelButton = new PanelButton();
 
         add(panelButton);
 
         setVisible(true);
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-
     }
 
     private class PanelButton extends JPanel{
@@ -52,6 +56,7 @@ class FrameTest extends JFrame
         JButton buttonRojo = new JButton("Rojo");
         JButton buttonAzul = new JButton("Azul");
         JButton buttonGoComboBoxSlider = new JButton("Abrir ComboBox JSlider");
+        JButton buttonGoSpinner = new JButton("Abrir Spinner");
 
         public PanelButton(){
 
@@ -73,6 +78,7 @@ class FrameTest extends JFrame
             buttonGoTextAreaTest.addActionListener(new EventoAbrirPanel());
             buttonGoCheckBoxRadioB.addActionListener(new EventoAbrirPanel());
             buttonGoComboBoxSlider.addActionListener(new EventoAbrirPanel());
+            buttonGoSpinner.addActionListener(new EventoAbrirPanel());
 
             buttonAmarillo.setBackground(Color.yellow);
             add(buttonAmarillo);
@@ -102,6 +108,10 @@ class FrameTest extends JFrame
             buttonGoComboBoxSlider.setForeground(Color.blue);
             buttonGoComboBoxSlider.setBackground(Color.WHITE);
             add(buttonGoComboBoxSlider);
+
+            buttonGoSpinner.setBackground(Color.DARK_GRAY.darker());
+            buttonGoSpinner.setForeground(Color.ORANGE);
+            add(buttonGoSpinner);
         }
 
         private class EventoAbrirPanel implements ActionListener{
@@ -140,6 +150,20 @@ class FrameTest extends JFrame
                             frameBorderLayout.setState(JFrame.NORMAL);
 
                         frameBorderLayout.toFront();
+                    }
+
+                }else if(evento == buttonGoSpinner){
+
+                    if(!ventanaSpinner){
+                        frameSpinner = new FrameSpinner();
+                        frameSpinner.setVisible(true);
+                        ventanaSpinner = true;
+                    }else{
+
+                        if (frameSpinner.getState() == JFrame.ICONIFIED)
+                            frameSpinner.setState(JFrame.NORMAL);
+
+                        frameSpinner.toFront();
                     }
 
                 }else if(evento == buttonGoComboBoxSlider){

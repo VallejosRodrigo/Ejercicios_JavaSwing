@@ -10,6 +10,8 @@ import java.util.Objects;
 
 public class FrameInterfaceEmailPass extends JFrame
 {
+    static String usuarioInsertado;
+    static boolean usuarioOK = false, passOK = false;
 
     public FrameInterfaceEmailPass(){
         start();
@@ -30,6 +32,7 @@ public class FrameInterfaceEmailPass extends JFrame
 
     private class PanelMain extends JPanel{
 
+        JLabel jLabel = new JLabel("");
         JButton buttonSendAll;
         PanelUsserPass panelUsserPass = new PanelUsserPass();
         boolean comprobacionArroba, comprobacionPunto;
@@ -38,9 +41,25 @@ public class FrameInterfaceEmailPass extends JFrame
         public PanelMain(){
             setLayout(new BorderLayout());
             add(buttonSendAll = new JButton("Enviar"), BorderLayout.SOUTH);
+            buttonSendAll.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                   jLabel.setFont(new Font("Serif",Font.BOLD,18));
 
+                   if(usuarioOK && passOK)
+                       jLabel.setText("¡Bienvenido/a "+usuarioInsertado+"!");
+                   else
+                   {
+                       jLabel.setFont(new Font("Serif", Font.BOLD, 25));
+                       jLabel.setText("Usuario o Contraseña Incorrecto");
+                   }
+
+                }
+            });
             add(panelUsserPass,BorderLayout.NORTH);
-
+            add(jLabel,BorderLayout.CENTER);
 
         }
 
@@ -100,7 +119,7 @@ public class FrameInterfaceEmailPass extends JFrame
                 }
 
                 private void verificarUsser(){
-                    String usuarioInsertado = tbxUsser.getText();
+                    usuarioInsertado = tbxUsser.getText();
                     int longitud = usuarioInsertado.length();
 
                     for(int i=0; i<longitud; i++){
@@ -117,12 +136,15 @@ public class FrameInterfaceEmailPass extends JFrame
                     if(!Objects.equals(tbxUsser.getText(),"")){
                         if(comprobacionArroba && comprobacionPunto){
                             labelInfoUsser.setText("Email Correcto!");
+                            usuarioOK = true;
                             comprobacionArroba = false;
                             comprobacionPunto = false;
 
                         }else
+                        {
                             labelInfoUsser.setText("Email Incorrecto");
-
+                            usuarioOK = false;
+                        }
                     }else
                         labelInfoUsser.setText("");
 
@@ -135,14 +157,17 @@ public class FrameInterfaceEmailPass extends JFrame
                         if(password.length <8 || password.length>12){
                             tbxPassword.setBackground(Color.red.brighter().brighter().brighter().brighter());
                             labelInfoPass.setText("Debe ingresar entre 8 y 12 caracteres");
+                            passOK = false;
 
                         }else {
                             tbxPassword.setBackground(Color.white);
                             labelInfoPass.setText("");
+                            passOK = true;
                         }
                     }else{
                         labelInfoPass.setText("");
                         tbxPassword.setBackground(Color.white);
+                        passOK = false;
                     }
 
 

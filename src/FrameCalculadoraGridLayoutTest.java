@@ -22,8 +22,8 @@ class FrameCalculadoraGridLayoutTest extends JFrame
     public FrameCalculadoraGridLayoutTest()
     {
 
-        setBounds(800, 25, 250, 350);
-        setTitle("Calculadora - Test GridLayout");
+        setBounds(800, 25, 280, 350);
+        setTitle("Calculadora");
 
         PanelDisplay panelDisplay = new PanelDisplay();
         add(panelDisplay);
@@ -96,8 +96,6 @@ class FrameCalculadoraGridLayoutTest extends JFrame
                 }
                 botonPantalla.setText(botonPantalla.getText() + txtBoton);
 
-
-
              //   acumuladoGuardado1 = Double.parseDouble(botonPantalla.getText());
             //    System.out.println(acumuladoGuardado1);
 
@@ -114,10 +112,6 @@ class FrameCalculadoraGridLayoutTest extends JFrame
                 String operacion = e.getActionCommand();
                 calcular(Double.parseDouble(botonPantalla.getText()));
                 ultimaOperacion = operacion;
-
-
-
-
 
           /*      botonPantalla.setText("0");
                 acumuladorSuma = acumuladorSuma + acumuladoGuardado1;
